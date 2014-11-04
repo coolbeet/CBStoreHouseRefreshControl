@@ -1,0 +1,147 @@
+#########################
+# .gitignore file for Xcode4 / OS X Source projects
+#
+# For latest version, see: http://stackoverflow.com/questions/49478/git-ignore-file-for-xcode-projects
+# NB: if you are storing "built" products, this WILL NOT WORK,
+# and you should use a different .gitignore (or none at all)
+# This file is for SOURCE projects, where there are many extra
+# files that we want to exclude
+#
+#########################
+
+#####
+# OS X temporary files that should never be committed
+#
+# c.f. http://www.westwind.com/reference/os-x/invisibles.html
+# *.lock - this is used and abused by many editors for many different things, so YMMV
+
+.DS_Store
+.Trashes
+*.swp
+*.lock
+profile
+cocos2d-x-2.2
+
+
+####
+# Xcode temporary files that should never be committed
+# 
+# NIB/XIB files still exist even on Storyboard projects, so we want this...
+ 
+*~.nib
+ 
+ 
+####
+# Xcode build files -
+#
+# NB: slash on the end, so we only remove the FOLDER, not any files that were badly named "DerivedData" or "build"
+
+*/DerivedData/*
+*/build/*
+ 
+ 
+#####
+# Xcode private settings (window sizes, bookmarks, breakpoints, custom executables, smart groups)
+#
+# This is complicated:
+#
+# SOMETIMES you need to put this file in version control.
+# Apple designed it poorly - if you use "custom executables", they are saved in this file.
+#  
+# 99% of projects do NOT use those, so they do NOT want to version control this file.
+#  ..but if you're in the 1%, comment out the line "*.pbxuser"
+#
+# .pbxuser: http://lists.apple.com/archives/xcode-users/2004/Jan/msg00193.html
+# .mode1v3: http://lists.apple.com/archives/xcode-users/2007/Oct/msg00465.html
+# .mode2v3: http://lists.apple.com/archives/xcode-users/2007/Oct/msg00465.html
+# .perspectivev3: http://stackoverflow.com/questions/5223297/xcode-projects-what-is-a-perspectivev3-file
+
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+ 
+ 
+####
+# Xcode 4 - semi-personal settings
+#
+#
+# OPTION 1: ---------------------------------
+#     throw away ALL personal settings (including custom schemes!
+#     - unless they are "shared")
+#
+# NB: this is exclusive with OPTION 2 below
+
+xcuserdata
+ 
+# OPTION 2: ---------------------------------
+#     get rid of ALL personal settings, but KEEP SOME OF THEM
+#     - NB: you must manually uncomment the bits you want to keep
+#
+# NB: this is exclusive with OPTION 1 above
+#
+#xcuserdata/**/*
+ 
+# (requires option 2 above): Personal Schemes
+#
+#!xcuserdata/**/xcschemes/*
+ 
+
+####
+# XCode 4 workspaces - more detailed
+#
+# Workspaces are important! They are a core feature of Xcode - don't exclude them :)
+# 
+# Workspace layout is quite spammy. For reference:
+# 
+# /(root)/
+#   /(project-name).xcodeproj/
+#     project.pbxproj
+#     /project.xcworkspace/
+#       contents.xcworkspacedata
+#       /xcuserdata/
+#         /(your name)/xcuserdatad/
+#           UserInterfaceState.xcuserstate
+#     /xcsshareddata/
+#       /xcschemes/
+#         (shared scheme name).xcscheme
+#     /xcuserdata/
+#       /(your name)/xcuserdatad/
+#         (private scheme).xcscheme
+#         xcschememanagement.plist
+# 
+# 
+ 
+
+####
+# Xcode 4 - Deprecated classes
+# 
+# Allegedly, if you manually "deprecate" your classes, they get moved here.
+# 
+# We're using source-control, so this is a "feature" that we do not want!
+ 
+*.moved-aside
+ 
+
+####
+# Cocoapods: cocoapods.org
+# 
+# Ignoring these files means that whoever uses the code will first have to run:
+# pod install
+# in the App.xcodeproj directory.
+# This ensures the latest dependencies are used.
+
+Pods/*
+Podfile.lock
+
+
+####
+# Injection For XCode: injectionforxcode.com
+# 
+# Repo: github.com/johnno1962/injectionforxcode
+
+iOSInjectionProject/*

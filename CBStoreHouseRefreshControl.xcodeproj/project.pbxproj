@@ -1,0 +1,448 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0BFB9BAA1A084144008C790A /* CBStoreHouseRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BFB9BA91A084144008C790A /* CBStoreHouseRefreshControl.m */; };
+		FF6F542D1A086CC200BE5C52 /* storehouse.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF6F542C1A086CC200BE5C52 /* storehouse.plist */; };
+		FFB290C919FCC1320058F2BF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB290C819FCC1320058F2BF /* main.m */; };
+		FFB290CC19FCC1320058F2BF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB290CB19FCC1320058F2BF /* AppDelegate.m */; };
+		FFB290CF19FCC1320058F2BF /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB290CE19FCC1320058F2BF /* ContentViewController.m */; };
+		FFB290D419FCC1320058F2BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFB290D319FCC1320058F2BF /* Images.xcassets */; };
+		FFB290D719FCC1320058F2BF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFB290D519FCC1320058F2BF /* LaunchScreen.xib */; };
+		FFB290E319FCC1320058F2BF /* CBStoreHouseRefreshControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB290E219FCC1320058F2BF /* CBStoreHouseRefreshControlTests.m */; };
+		FFFB8C961A02044C0007988E /* BarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FFFB8C951A02044C0007988E /* BarItem.m */; };
+		FFFB8C9C1A0325D50007988E /* AKTA.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFFB8C9B1A0325D50007988E /* AKTA.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FFB290DD19FCC1320058F2BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFB290BB19FCC1320058F2BF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FFB290C219FCC1320058F2BF;
+			remoteInfo = CBStoreHousePullToRefresh;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0BFB9BA91A084144008C790A /* CBStoreHouseRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CBStoreHouseRefreshControl.m; path = Class/CBStoreHouseRefreshControl.m; sourceTree = "<group>"; };
+		FF6F542C1A086CC200BE5C52 /* storehouse.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = storehouse.plist; sourceTree = "<group>"; };
+		FFB290C319FCC1320058F2BF /* CBStoreHouseRefreshControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CBStoreHouseRefreshControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFB290C719FCC1320058F2BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FFB290C819FCC1320058F2BF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FFB290CA19FCC1320058F2BF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FFB290CB19FCC1320058F2BF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FFB290CD19FCC1320058F2BF /* ContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		FFB290CE19FCC1320058F2BF /* ContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
+		FFB290D319FCC1320058F2BF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FFB290D619FCC1320058F2BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		FFB290DC19FCC1320058F2BF /* CBStoreHouseRefreshControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CBStoreHouseRefreshControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFB290E119FCC1320058F2BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFB290E219FCC1320058F2BF /* CBStoreHouseRefreshControlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CBStoreHouseRefreshControlTests.m; sourceTree = "<group>"; };
+		FFFB8C941A02044C0007988E /* BarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarItem.h; path = Class/BarItem.h; sourceTree = "<group>"; };
+		FFFB8C951A02044C0007988E /* BarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarItem.m; path = Class/BarItem.m; sourceTree = "<group>"; };
+		FFFB8C981A02F7DC0007988E /* CBStoreHouseRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBStoreHouseRefreshControl.h; path = Class/CBStoreHouseRefreshControl.h; sourceTree = "<group>"; };
+		FFFB8C9B1A0325D50007988E /* AKTA.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = AKTA.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FFB290C019FCC1320058F2BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFB290D919FCC1320058F2BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FFB290BA19FCC1320058F2BF = {
+			isa = PBXGroup;
+			children = (
+				FFFB8C971A0204520007988E /* Class */,
+				FFB290C519FCC1320058F2BF /* CBStoreHouseRefreshControl */,
+				FFB290DF19FCC1320058F2BF /* CBStoreHouseRefreshControl Tests */,
+				FFB290C419FCC1320058F2BF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FFB290C419FCC1320058F2BF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FFB290C319FCC1320058F2BF /* CBStoreHouseRefreshControl.app */,
+				FFB290DC19FCC1320058F2BF /* CBStoreHouseRefreshControlTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FFB290C519FCC1320058F2BF /* CBStoreHouseRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				FFFB8C9B1A0325D50007988E /* AKTA.plist */,
+				FF6F542C1A086CC200BE5C52 /* storehouse.plist */,
+				FFB290CA19FCC1320058F2BF /* AppDelegate.h */,
+				FFB290CB19FCC1320058F2BF /* AppDelegate.m */,
+				FFB290CD19FCC1320058F2BF /* ContentViewController.h */,
+				FFB290CE19FCC1320058F2BF /* ContentViewController.m */,
+				FFB290D319FCC1320058F2BF /* Images.xcassets */,
+				FFB290D519FCC1320058F2BF /* LaunchScreen.xib */,
+				FFB290C619FCC1320058F2BF /* Supporting Files */,
+			);
+			path = CBStoreHouseRefreshControl;
+			sourceTree = "<group>";
+		};
+		FFB290C619FCC1320058F2BF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FFB290C719FCC1320058F2BF /* Info.plist */,
+				FFB290C819FCC1320058F2BF /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FFB290DF19FCC1320058F2BF /* CBStoreHouseRefreshControl Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FFB290E219FCC1320058F2BF /* CBStoreHouseRefreshControlTests.m */,
+				FFB290E019FCC1320058F2BF /* Supporting Files */,
+			);
+			name = "CBStoreHouseRefreshControl Tests";
+			path = CBStoreHouseRefreshControlTests;
+			sourceTree = "<group>";
+		};
+		FFB290E019FCC1320058F2BF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FFB290E119FCC1320058F2BF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FFFB8C971A0204520007988E /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				FFFB8C941A02044C0007988E /* BarItem.h */,
+				FFFB8C951A02044C0007988E /* BarItem.m */,
+				FFFB8C981A02F7DC0007988E /* CBStoreHouseRefreshControl.h */,
+				0BFB9BA91A084144008C790A /* CBStoreHouseRefreshControl.m */,
+			);
+			name = Class;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FFB290C219FCC1320058F2BF /* CBStoreHouseRefreshControl */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FFB290E619FCC1320058F2BF /* Build configuration list for PBXNativeTarget "CBStoreHouseRefreshControl" */;
+			buildPhases = (
+				FFB290BF19FCC1320058F2BF /* Sources */,
+				FFB290C019FCC1320058F2BF /* Frameworks */,
+				FFB290C119FCC1320058F2BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CBStoreHouseRefreshControl;
+			productName = CBStoreHousePullToRefresh;
+			productReference = FFB290C319FCC1320058F2BF /* CBStoreHouseRefreshControl.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FFB290DB19FCC1320058F2BF /* CBStoreHouseRefreshControlTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FFB290E919FCC1320058F2BF /* Build configuration list for PBXNativeTarget "CBStoreHouseRefreshControlTests" */;
+			buildPhases = (
+				FFB290D819FCC1320058F2BF /* Sources */,
+				FFB290D919FCC1320058F2BF /* Frameworks */,
+				FFB290DA19FCC1320058F2BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FFB290DE19FCC1320058F2BF /* PBXTargetDependency */,
+			);
+			name = CBStoreHouseRefreshControlTests;
+			productName = CBStoreHousePullToRefreshTests;
+			productReference = FFB290DC19FCC1320058F2BF /* CBStoreHouseRefreshControlTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FFB290BB19FCC1320058F2BF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Suyu Zhang";
+				TargetAttributes = {
+					FFB290C219FCC1320058F2BF = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					FFB290DB19FCC1320058F2BF = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = FFB290C219FCC1320058F2BF;
+					};
+				};
+			};
+			buildConfigurationList = FFB290BE19FCC1320058F2BF /* Build configuration list for PBXProject "CBStoreHouseRefreshControl" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FFB290BA19FCC1320058F2BF;
+			productRefGroup = FFB290C419FCC1320058F2BF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FFB290C219FCC1320058F2BF /* CBStoreHouseRefreshControl */,
+				FFB290DB19FCC1320058F2BF /* CBStoreHouseRefreshControlTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FFB290C119FCC1320058F2BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFFB8C9C1A0325D50007988E /* AKTA.plist in Resources */,
+				FFB290D719FCC1320058F2BF /* LaunchScreen.xib in Resources */,
+				FFB290D419FCC1320058F2BF /* Images.xcassets in Resources */,
+				FF6F542D1A086CC200BE5C52 /* storehouse.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFB290DA19FCC1320058F2BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FFB290BF19FCC1320058F2BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFFB8C961A02044C0007988E /* BarItem.m in Sources */,
+				FFB290CF19FCC1320058F2BF /* ContentViewController.m in Sources */,
+				FFB290CC19FCC1320058F2BF /* AppDelegate.m in Sources */,
+				0BFB9BAA1A084144008C790A /* CBStoreHouseRefreshControl.m in Sources */,
+				FFB290C919FCC1320058F2BF /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFB290D819FCC1320058F2BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFB290E319FCC1320058F2BF /* CBStoreHouseRefreshControlTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FFB290DE19FCC1320058F2BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FFB290C219FCC1320058F2BF /* CBStoreHouseRefreshControl */;
+			targetProxy = FFB290DD19FCC1320058F2BF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FFB290D519FCC1320058F2BF /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FFB290D619FCC1320058F2BF /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FFB290E419FCC1320058F2BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FFB290E519FCC1320058F2BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FFB290E719FCC1320058F2BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CBStoreHouseRefreshControl/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = CBStoreHouseRefreshControl;
+			};
+			name = Debug;
+		};
+		FFB290E819FCC1320058F2BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = CBStoreHouseRefreshControl/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = CBStoreHouseRefreshControl;
+			};
+			name = Release;
+		};
+		FFB290EA19FCC1320058F2BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CBStoreHouseRefreshControl/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = CBStoreHouseRefreshControlTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CBStoreHouseRefreshControl.app/CBStoreHouseRefreshControl";
+			};
+			name = Debug;
+		};
+		FFB290EB19FCC1320058F2BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CBStoreHouseRefreshControl/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = CBStoreHouseRefreshControlTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CBStoreHouseRefreshControl.app/CBStoreHouseRefreshControl";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FFB290BE19FCC1320058F2BF /* Build configuration list for PBXProject "CBStoreHouseRefreshControl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFB290E419FCC1320058F2BF /* Debug */,
+				FFB290E519FCC1320058F2BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FFB290E619FCC1320058F2BF /* Build configuration list for PBXNativeTarget "CBStoreHouseRefreshControl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFB290E719FCC1320058F2BF /* Debug */,
+				FFB290E819FCC1320058F2BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FFB290E919FCC1320058F2BF /* Build configuration list for PBXNativeTarget "CBStoreHouseRefreshControlTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFB290EA19FCC1320058F2BF /* Debug */,
+				FFB290EB19FCC1320058F2BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FFB290BB19FCC1320058F2BF /* Project object */;
+}
