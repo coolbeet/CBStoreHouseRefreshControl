@@ -111,7 +111,7 @@ Author
 
 Suyu Zhang  
 suyu_zhang@hotmail.com  
-[suyuzhang.com](suyuzhang.com)  
+[suyuzhang.com](http://suyuzhang.com/)  
 
 
 License
