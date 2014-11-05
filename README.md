@@ -94,14 +94,14 @@ Note:
 Configuration
 -------------
 
-Using following properties to configure CBStoreHouseRefreshControl's view and animation:
+Play with following parameters to configure CBStoreHouseRefreshControl's view and animation:
 
-- Set the bar color with the `color` property
-- Set the bar width with the `lineWidth` property
-- Set the height of control with the `dropHeight` property
-- Set the scale of control with the `scale` property
-- Adjust how disperse the bar items appear/disappear by changing the `horizontalRandomness` property
-- Adjust the time offset of the appear/disappear animation by changing the `internalAnimationFactor` property, for example if `internalAnimationFactor` is 1 all bar items will appear/disappear all together.
+- Set the bar color with the `color` parameter
+- Set the bar width with the `lineWidth` parameter
+- Set the height of control with the `dropHeight` parameter
+- Set the scale of control with the `scale` parameter
+- Adjust how disperse the bar items appear/disappear by changing the `horizontalRandomness` parameter
+- Adjust the time offset of the appear/disappear animation by changing the `internalAnimationFactor` parameter, for example if `internalAnimationFactor` is 1 all bar items will appear/disappear all together.
 
 
 Author
