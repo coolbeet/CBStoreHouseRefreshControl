@@ -13,6 +13,7 @@ static const CGFloat kloadingIndividualAnimationTiming = 0.8;
 static const CGFloat kbarDarkAlpha = 0.4;
 static const CGFloat kloadingTimingOffset = 0.1;
 static const CGFloat kdisappearDuration = 1.2;
+static const CGFloat krelativeHeightFactor = 2.f/5.f;
 
 typedef enum {
     CBStoreHouseRefreshControlStateIdle = 0,
@@ -135,7 +136,7 @@ NSString *const yKey = @"y";
 - (void)scrollViewDidScroll
 {
     if (self.originalTopContentInset == 0) self.originalTopContentInset = self.scrollView.contentInset.top;
-    self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.realContentOffsetY*2/5);
+    self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.realContentOffsetY*krelativeHeightFactor);
     if (self.state == CBStoreHouseRefreshControlStateIdle)
         [self updateBarItemsWithProgress:self.animationProgress];
 }
@@ -253,7 +254,8 @@ NSString *const yKey = @"y";
 - (void)updateDisappearAnimation
 {
     if (self.disappearProgress >= 0 && self.disappearProgress <= 1) {
-        self.disappearProgress -= 1/60.f/kdisappearDuration*1.2f;
+        self.disappearProgress -= 1/60.f/kdisappearDuration;
+        //60.f means this method get called 60 times per second
         [self updateBarItemsWithProgress:self.disappearProgress];
     }
 }
