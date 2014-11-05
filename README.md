@@ -90,6 +90,7 @@ All `BarItem` will share one coordinate system whose origin is at the top-left c
 Note: 
 - Make sure you put the right key which are `startPoints` and `endPoints`.
 - Make sure you are using the right format (`{x,y}`) for coordinates.
+- The highlight/loading animation will highlight each bar item in the same order you declare them in plist, use `reverseLoadingAnimation` to reverse the animation.
 
 Configuration
 -------------
@@ -101,6 +102,7 @@ Play with following parameters to configure CBStoreHouseRefreshControl's view an
 - Set the height of control with the `dropHeight` parameter
 - Set the scale of control with the `scale` parameter
 - Adjust how disperse the bar items appear/disappear by changing the `horizontalRandomness` parameter
+- Set if reversing the loading animation with the `reverseLoadingAnimation` parameter, if set to `YES`, the last bar item will be highlighted firstly.
 - Adjust the time offset of the appear/disappear animation by changing the `internalAnimationFactor` parameter, for example if `internalAnimationFactor` is 1 all bar items will appear/disappear all together.
 
 
