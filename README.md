@@ -87,6 +87,10 @@ All `BarItem` will share one coordinate system whose origin is at the top-left c
 
 ![screenshot2] (https://s3.amazonaws.com/suyu.test/square.png)
 
+The result will look like this:
+
+![screenshot3] (https://s3.amazonaws.com/suyu.test/square.gif)
+
 Note: 
 - Make sure you put the right key which are `startPoints` and `endPoints`.
 - Make sure you are using the right format (`{x,y}`) for coordinates.
