@@ -14,9 +14,12 @@ You can use any shape through a `plist` file, like this one which is my [company
 
 Which files are needed?
 ---
-You only need to include `CBStoreHouseRefreshControl (.h .m)` and `BarItem (.h .m)` in your project.
+CBStoreHouseRefreshControl is available through [CocoaPods](http://cocoapods.org), to install
+it simply add the following line to your Podfile:
 
-CocoaPods support is coming very soon!
+    pod "CBStoreHouseRefreshControl"
+
+Alternatively, you can just drag `CBStoreHouseRefreshControl (.h .m)` and `BarItem (.h .m)` into your own project.
 
 How to use it
 ---
