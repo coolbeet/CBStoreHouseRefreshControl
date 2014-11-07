@@ -1,5 +1,8 @@
-CBStoreHouseRefreshControl
+CBStoreHouseRefreshControl ![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)
 =======================
+
+[![Version](http://cocoapod-badges.herokuapp.com/v/CBStoreHouseRefreshControl/badge.png)](http://cocoadocs.org/docsets/CBStoreHouseRefreshControl)
+[![Platform](http://cocoapod-badges.herokuapp.com/p/CBStoreHouseRefreshControl/badge.png)](http://cocoadocs.org/docsets/CBStoreHouseRefreshControl)
 
 What is it?
 ---
