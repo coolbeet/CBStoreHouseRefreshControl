@@ -121,7 +121,7 @@ suyu_zhang@hotmail.com
 
 License
 -------
-CBStoreHouseRefreshControl is available under the MIT license.
+Copyright (c) 2014 Suyu Zhang <suyu_zhang@hotmail.com>. See the LICENSE file for license rights and limitations (MIT).
 
 
 
