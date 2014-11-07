@@ -97,7 +97,7 @@ The result will look like this:
 
 ![screenshot3] (https://s3.amazonaws.com/suyu.test/square.gif)
 
-Note: 
+#### Notes: 
 - Make sure you put the right key which are `startPoints` and `endPoints`.
 - Make sure you are using the right format (`{x,y}`) for coordinates.
 - The highlight/loading animation will highlight each bar item in the same order you declare them in plist, use `reverseLoadingAnimation` to reverse the animation.
@@ -116,6 +116,10 @@ Play with following parameters to configure CBStoreHouseRefreshControl's view an
 - Set if reversing the loading animation with the `reverseLoadingAnimation` parameter, if set to `YES`, the last bar item will be highlighted firstly.
 - Adjust the time offset of the appear/disappear animation by changing the `internalAnimationFactor` parameter, for example if `internalAnimationFactor` is 1 all bar items will appear/disappear all together.
 
+Who's using it?
+---------------
+
+We've a [wiki page](https://github.com/coolbeet/CBStoreHouseRefreshControl/wiki) for that, feel free to add your projects there!
 
 Author
 ------
