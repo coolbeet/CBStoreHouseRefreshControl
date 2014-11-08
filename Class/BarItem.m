@@ -24,18 +24,17 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.startPoint = startPoint;
-        self.endPoint = endPoint;
-        self.lineWidth = lineWidth;
-        self.color = color;
-        self.backgroundColor = [UIColor clearColor];
+        _startPoint = startPoint;
+        _endPoint = endPoint;
+        _lineWidth = lineWidth;
+        _color = color;
         
         CGPoint (^middlePoint)(CGPoint, CGPoint) = ^CGPoint(CGPoint a, CGPoint b) {
             CGFloat x = (a.x + b.x)/2.f;
             CGFloat y = (a.y + b.y)/2.f;
             return CGPointMake(x, y);
         };
-        self.middlePoint = middlePoint(startPoint, endPoint);
+        _middlePoint = middlePoint(startPoint, endPoint);
     }
     return self;
 }
