@@ -103,6 +103,8 @@ The result will look like this:
 - The highlight/loading animation will highlight each bar item in the same order you declare them in plist, use `reverseLoadingAnimation` to reverse the animation.
 
 Easy way to generate `startPoint` and `endPoint`?
+---
+
 [@isaced](https://github.com/isaced) mentions that it's easier to use [PaintCode](http://www.paintcodeapp.com/) to generate `startPoint` and `endPoint`:
 
 ![screenshot4] (https://cloud.githubusercontent.com/assets/2088605/4948694/0ce2da74-667f-11e4-8ce7-a2067f15558d.png)
