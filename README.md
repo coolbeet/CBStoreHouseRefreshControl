@@ -101,7 +101,17 @@ The result will look like this:
 - Make sure you put the right key which are `startPoints` and `endPoints`.
 - Make sure you are using the right format (`{x,y}`) for coordinates.
 - The highlight/loading animation will highlight each bar item in the same order you declare them in plist, use `reverseLoadingAnimation` to reverse the animation.
-- **[@isaced](https://github.com/isaced) mentions that it's easier to use [PaintCode](http://www.paintcodeapp.com/) to generate `startPoint` and `endPoint`, more info [here](https://github.com/coolbeet/CBStoreHouseRefreshControl/issues/1).**
+
+Easy way to generate `startPoint` and `endPoint`?
+[@isaced](https://github.com/isaced) mentions that it's easier to use [PaintCode](http://www.paintcodeapp.com/) to generate `startPoint` and `endPoint`:
+
+![screenshot4] (https://cloud.githubusercontent.com/assets/2088605/4948694/0ce2da74-667f-11e4-8ce7-a2067f15558d.png)
+
+Result:
+
+![screenshot5] (https://cloud.githubusercontent.com/assets/2088605/4948707/3b76afb4-667f-11e4-91a4-9509d17356fa.gif)
+
+You can get more info [here](https://github.com/coolbeet/CBStoreHouseRefreshControl/issues/1).
 
 Configuration
 -------------
