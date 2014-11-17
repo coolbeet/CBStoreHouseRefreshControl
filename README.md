@@ -79,7 +79,7 @@ Lastly, make sure you've implemented the `refreshAction` you passed it earlier t
     //call your loading method here
 
     //Finshed loading the data, reset the refresh control
-    [self.storeHouseRefreshControl finishedLoading];
+    [self.storeHouseRefreshControl finishingLoading];
 }
 ```
 For more details, please check out the demo app's code.
