@@ -20,7 +20,7 @@ Which files are needed?
 CBStoreHouseRefreshControl is available through [CocoaPods](http://cocoapods.org), to install
 it simply add the following line to your Podfile:
 
-    pod "CBStoreHouseRefreshControl"
+    pod 'CBStoreHouseRefreshControl'
 
 Alternatively, you can just drag `CBStoreHouseRefreshControl (.h .m)` and `BarItem (.h .m)` into your own project.
 
