@@ -17,6 +17,7 @@
 
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) CGFloat scale;
+@property (nonatomic, assign) CGFloat pointScale;
 
 @property (nonatomic, assign) CGFloat animationHeight;
 @property (nonatomic, assign) CGFloat horizontalRandomness;

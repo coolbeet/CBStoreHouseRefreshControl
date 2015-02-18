@@ -92,6 +92,7 @@
     self.reverseLoadingAnimation = NO;
     self.internalAnimationFactor = 0.7;
     self.loadingAnimationDuration = 1.2;
+    self.pointScale = 1.0;
 }
 
 - (instancetype)initWithStartPoints:(NSArray *)startPoints endPoints:(NSArray *)endPoints;
@@ -213,18 +214,23 @@
 
 - (CGPoint)pointFromObject:(id)object
 {
+    CGPoint point = CGPointZero;
+    
     if ([object isKindOfClass:[NSString class]])
     {
-        return CGPointFromString(object);
+        point = CGPointFromString(object);
     }
     else if ([object isKindOfClass:[NSValue class]])
     {
         NSValue* value = object;
         
-        return [value CGPointValue];
+        point = [value CGPointValue];
     }
     
-    return CGPointZero;
+    point.x *= self.pointScale;
+    point.y *= self.pointScale;
+    
+    return point;
 }
 
 - (void)updateBarItemsWithProgress:(CGFloat)progress
