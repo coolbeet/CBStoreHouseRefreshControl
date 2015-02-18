@@ -53,4 +53,6 @@
 
 - (void)setStartPoints:(NSArray *)startPoints endPoints:(NSArray *)endPoints;
 
+- (void)setPointsWithPlist:(NSString *)plist;
+
 @end

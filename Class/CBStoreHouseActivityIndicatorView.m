@@ -99,6 +99,14 @@
     return [self initWithStartPoints:points[startPointKey] endPoints:points[endPointKey]];
 }
 
+- (void)setPointsWithPlist:(NSString *)plist
+{
+    NSDictionary* points = [self loadPointsFromPlist:plist];
+    
+    self.startPoints = points[startPointKey];
+    self.endPoints = points[endPointKey];
+}
+
 - (void)setStartPoints:(NSArray *)startPoints endPoints:(NSArray *)endPoints
 {
     self.startPoints = startPoints;
