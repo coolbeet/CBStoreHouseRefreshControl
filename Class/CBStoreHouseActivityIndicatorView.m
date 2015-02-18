@@ -92,6 +92,8 @@
     self.reverseLoadingAnimation = NO;
     self.internalAnimationFactor = 0.7;
     self.loadingAnimationDuration = 1.2;
+    self.indeterminateAnimationOffset = 0.1;
+    self.indeterminateAnimationTiming = 0.8;
     self.pointScale = 1.0;
 }
 
@@ -287,7 +289,7 @@
         for (int i = count - 1; i >= 0; i--)
         {
             BarItem *barItem = [self.barItems objectAtIndex:i];
-            [self performSelector:@selector(barItemAnimation:) withObject:barItem afterDelay:(self.barItems.count - i - 1) * kloadingTimingOffset inModes:@[NSRunLoopCommonModes]];
+            [self performSelector:@selector(barItemAnimation:) withObject:barItem afterDelay:(self.barItems.count - i - 1) * self.indeterminateAnimationOffset inModes:@[NSRunLoopCommonModes]];
         }
     }
     else
@@ -296,7 +298,7 @@
         {
             BarItem *barItem = [self.barItems objectAtIndex:i];
             
-            [self performSelector:@selector(barItemAnimation:) withObject:barItem afterDelay:i * kloadingTimingOffset inModes:@[ NSRunLoopCommonModes ]];
+            [self performSelector:@selector(barItemAnimation:) withObject:barItem afterDelay:i * self.indeterminateAnimationOffset inModes:@[ NSRunLoopCommonModes ]];
         }
     }
 }
@@ -305,14 +307,12 @@
 {
     if (self.progress > 0.0 && self.progress < 1.0)
     {
-        //NSLog(@"Prog: %f", self.progress);
-        
         return;
     }
     
     barItem.alpha = 1;
     [barItem.layer removeAllAnimations];
-    [UIView animateWithDuration:kloadingIndividualAnimationTiming animations:^
+    [UIView animateWithDuration:self.indeterminateAnimationTiming animations:^
     {
         barItem.alpha = kbarDarkAlpha;
     } completion:nil];

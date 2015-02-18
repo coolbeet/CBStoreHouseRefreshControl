@@ -28,7 +28,10 @@
  *  Loading animation will first construct the item and deconstuct
  */
 @property (nonatomic, assign) BOOL hasLoadingAnimation;
+
 @property (nonatomic, assign) NSTimeInterval loadingAnimationDuration;
+@property (nonatomic, assign) NSTimeInterval indeterminateAnimationTiming;
+@property (nonatomic, assign) NSTimeInterval indeterminateAnimationOffset;
 
 @property (nonatomic, assign, getter = isAnimating) BOOL animating;
 
