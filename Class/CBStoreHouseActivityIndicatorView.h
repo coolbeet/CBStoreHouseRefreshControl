@@ -51,4 +51,6 @@
  */
 - (instancetype)initWithStartPoints:(NSArray *)startPoints endPoints:(NSArray *)endPoints;
 
+- (void)setStartPoints:(NSArray *)startPoints endPoints:(NSArray *)endPoints;
+
 @end

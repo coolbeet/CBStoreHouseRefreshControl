@@ -99,6 +99,12 @@
     return [self initWithStartPoints:points[startPointKey] endPoints:points[endPointKey]];
 }
 
+- (void)setStartPoints:(NSArray *)startPoints endPoints:(NSArray *)endPoints
+{
+    self.startPoints = startPoints;
+    self.endPoints = endPoints;
+}
+
 - (void)load
 {
     if (self.isLoaded)
