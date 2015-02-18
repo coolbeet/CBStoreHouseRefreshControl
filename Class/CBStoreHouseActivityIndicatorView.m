@@ -62,7 +62,7 @@
     }
 }
 
-- (instancetype)initWithStartPoints:(NSArray *)startPoints endPoints:(NSArray *)endPoints;
+- (instancetype)init
 {
     self = [super initWithFrame:CGRectZero];
     
@@ -76,6 +76,18 @@
         self.reverseLoadingAnimation = NO;
         self.internalAnimationFactor = 0.7;
         self.loadingAnimationDuration = 1.2;
+    }
+    
+    return self;
+
+}
+
+- (instancetype)initWithStartPoints:(NSArray *)startPoints endPoints:(NSArray *)endPoints;
+{
+    self = [self init];
+    
+    if (self)
+    {
         self.startPoints = startPoints;
         self.endPoints = endPoints;
     }
