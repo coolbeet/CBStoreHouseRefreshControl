@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0BFB9BAA1A084144008C790A /* CBStoreHouseRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BFB9BA91A084144008C790A /* CBStoreHouseRefreshControl.m */; };
+		38C679AD1A948C9F00AE1465 /* CBStoreHouseActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C679AC1A948C9F00AE1465 /* CBStoreHouseActivityIndicatorView.m */; };
 		FF6F542D1A086CC200BE5C52 /* storehouse.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF6F542C1A086CC200BE5C52 /* storehouse.plist */; };
 		FFB290C919FCC1320058F2BF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB290C819FCC1320058F2BF /* main.m */; };
 		FFB290CC19FCC1320058F2BF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FFB290CB19FCC1320058F2BF /* AppDelegate.m */; };
@@ -31,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		0BFB9BA91A084144008C790A /* CBStoreHouseRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CBStoreHouseRefreshControl.m; path = Class/CBStoreHouseRefreshControl.m; sourceTree = "<group>"; };
+		38C679AB1A948C9F00AE1465 /* CBStoreHouseActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBStoreHouseActivityIndicatorView.h; path = Class/CBStoreHouseActivityIndicatorView.h; sourceTree = "<group>"; };
+		38C679AC1A948C9F00AE1465 /* CBStoreHouseActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CBStoreHouseActivityIndicatorView.m; path = Class/CBStoreHouseActivityIndicatorView.m; sourceTree = "<group>"; };
 		FF6F542C1A086CC200BE5C52 /* storehouse.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = storehouse.plist; sourceTree = "<group>"; };
 		FFB290C319FCC1320058F2BF /* CBStoreHouseRefreshControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CBStoreHouseRefreshControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFB290C719FCC1320058F2BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 				FFFB8C951A02044C0007988E /* BarItem.m */,
 				FFFB8C981A02F7DC0007988E /* CBStoreHouseRefreshControl.h */,
 				0BFB9BA91A084144008C790A /* CBStoreHouseRefreshControl.m */,
+				38C679AB1A948C9F00AE1465 /* CBStoreHouseActivityIndicatorView.h */,
+				38C679AC1A948C9F00AE1465 /* CBStoreHouseActivityIndicatorView.m */,
 			);
 			name = Class;
 			sourceTree = "<group>";
@@ -247,6 +252,7 @@
 				FFB290CC19FCC1320058F2BF /* AppDelegate.m in Sources */,
 				0BFB9BAA1A084144008C790A /* CBStoreHouseRefreshControl.m in Sources */,
 				FFB290C919FCC1320058F2BF /* main.m in Sources */,
+				38C679AD1A948C9F00AE1465 /* CBStoreHouseActivityIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +366,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = CBStoreHouseRefreshControl/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -371,6 +381,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = CBStoreHouseRefreshControl/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

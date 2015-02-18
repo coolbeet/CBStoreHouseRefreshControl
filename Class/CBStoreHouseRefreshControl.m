@@ -9,18 +9,6 @@
 #import "CBStoreHouseRefreshControl.h"
 #import "BarItem.h"
 
-static const CGFloat kloadingIndividualAnimationTiming = 0.8;
-static const CGFloat kbarDarkAlpha = 0.4;
-static const CGFloat kloadingTimingOffset = 0.1;
-static const CGFloat kdisappearDuration = 1.2;
-static const CGFloat krelativeHeightFactor = 2.f/5.f;
-
-typedef enum {
-    CBStoreHouseRefreshControlStateIdle = 0,
-    CBStoreHouseRefreshControlStateRefreshing = 1,
-    CBStoreHouseRefreshControlStateDisappearing = 2
-} CBStoreHouseRefreshControlState;
-
 NSString *const startPointKey = @"startPoints";
 NSString *const endPointKey = @"endPoints";
 NSString *const xKey = @"x";
