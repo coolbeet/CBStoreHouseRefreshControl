@@ -62,24 +62,36 @@
     }
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    [self setup];
+}
+
 - (instancetype)init
 {
     self = [super initWithFrame:CGRectZero];
     
     if (self)
     {
-        self.color = [UIColor whiteColor];
-        self.lineWidth = 2;
-        self.animationHeight = 80;
-        self.scale = 1;
-        self.horizontalRandomness = 150;
-        self.reverseLoadingAnimation = NO;
-        self.internalAnimationFactor = 0.7;
-        self.loadingAnimationDuration = 1.2;
+        [self setup];
     }
     
     return self;
 
+}
+
+- (void)setup
+{
+    self.color = [UIColor whiteColor];
+    self.lineWidth = 2;
+    self.animationHeight = 80;
+    self.scale = 1;
+    self.horizontalRandomness = 150;
+    self.reverseLoadingAnimation = NO;
+    self.internalAnimationFactor = 0.7;
+    self.loadingAnimationDuration = 1.2;
 }
 
 - (instancetype)initWithStartPoints:(NSArray *)startPoints endPoints:(NSArray *)endPoints;
