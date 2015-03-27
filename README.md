@@ -11,7 +11,7 @@ A **fully customizable** pull-to-refresh control for iOS inspired by [Storehouse
 
 ![screenshot1] (https://s3.amazonaws.com/suyu.test/CBStoreHouseRefreshControl1.gif)
 
-You can use any shape through a `plist` file, like this one which is my [company](http://akta.com/)'s logo:
+You can use any shape through a `plist` file, like this one:
 
 ![screenshot2] (https://s3.amazonaws.com/suyu.test/CBStoreHouseRefreshControl2.gif)
 
