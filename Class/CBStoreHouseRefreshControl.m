@@ -151,7 +151,7 @@ NSString *const yKey = @"y";
         if (self.state == CBStoreHouseRefreshControlStateRefreshing) {
             
             UIEdgeInsets newInsets = self.scrollView.contentInset;
-            newInsets.top = self.originalTopContentInset + self.dropHeight;
+            newInsets.top = self.originalTopContentInset;
             CGPoint contentOffset = self.scrollView.contentOffset;
             
             [UIView animateWithDuration:0 animations:^(void) {
