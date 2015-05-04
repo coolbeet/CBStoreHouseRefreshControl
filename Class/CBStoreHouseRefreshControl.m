@@ -89,7 +89,7 @@ NSString *const yKey = @"y";
     // Calculate frame according to points max width and height
     CGFloat width = 0;
     CGFloat height = 0;
-    NSDictionary *rootDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:plist ofType:@"plist"]];
+    NSDictionary *rootDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:self] pathForResource:plist ofType:@"plist"]];
     NSArray *startPoints = [rootDictionary objectForKey:startPointKey];
     NSArray *endPoints = [rootDictionary objectForKey:endPointKey];
     for (int i=0; i<startPoints.count; i++) {
