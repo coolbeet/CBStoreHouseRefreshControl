@@ -33,4 +33,6 @@
 
 - (void)finishingLoading;
 
+- (void)updateColor:(UIColor *)color;
+
 @end

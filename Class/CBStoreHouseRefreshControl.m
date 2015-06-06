@@ -132,6 +132,15 @@ NSString *const yKey = @"y";
     return refreshControl;
 }
 
+- (void)updateColor:(UIColor *)color
+{
+    for (BarItem *barItem in self.barItems) {
+        barItem.color = color;
+        [barItem setNeedsDisplay];
+    }
+}
+
+
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll
