@@ -36,7 +36,6 @@ NSString *const yKey = @"y";
 @property (nonatomic) SEL action;
 
 @property (nonatomic) CGFloat dropHeight;
-@property (nonatomic) CGFloat originalTopContentInset;
 @property (nonatomic) CGFloat disappearProgress;
 @property (nonatomic) CGFloat internalAnimationFactor;
 @property (nonatomic) int horizontalRandomness;
@@ -136,7 +135,6 @@ NSString *const yKey = @"y";
 
 - (void)scrollViewDidScroll
 {
-    if (self.originalTopContentInset == 0) self.originalTopContentInset = self.scrollView.contentInset.top;
     self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.realContentOffsetY*krelativeHeightFactor);
     if (self.state == CBStoreHouseRefreshControlStateIdle)
         [self updateBarItemsWithProgress:self.animationProgress];
@@ -151,7 +149,7 @@ NSString *const yKey = @"y";
         if (self.state == CBStoreHouseRefreshControlStateRefreshing) {
             
             UIEdgeInsets newInsets = self.scrollView.contentInset;
-            newInsets.top = self.originalTopContentInset + self.dropHeight;
+            newInsets.top = self.dropHeight;
             CGPoint contentOffset = self.scrollView.contentOffset;
             
             [UIView animateWithDuration:0 animations:^(void) {
@@ -181,7 +179,7 @@ NSString *const yKey = @"y";
 
 - (CGFloat)realContentOffsetY
 {
-    return self.scrollView.contentOffset.y + self.originalTopContentInset;
+    return self.scrollView.contentOffset.y;
 }
 
 - (void)updateBarItemsWithProgress:(CGFloat)progress
@@ -267,7 +265,7 @@ NSString *const yKey = @"y";
 {
     self.state = CBStoreHouseRefreshControlStateDisappearing;
     UIEdgeInsets newInsets = self.scrollView.contentInset;
-    newInsets.top = self.originalTopContentInset;
+    newInsets.top = 0;
     [UIView animateWithDuration:kdisappearDuration animations:^(void) {
         self.scrollView.contentInset = newInsets;
     } completion:^(BOOL finished) {
