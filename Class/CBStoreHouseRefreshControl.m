@@ -89,7 +89,7 @@ NSString *const yKey = @"y";
     // Calculate frame according to points max width and height
     CGFloat width = 0;
     CGFloat height = 0;
-    NSDictionary *rootDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:plist ofType:@"plist"]];
+    NSDictionary *rootDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:self] pathForResource:plist ofType:@"plist"]];
     NSArray *startPoints = [rootDictionary objectForKey:startPointKey];
     NSArray *endPoints = [rootDictionary objectForKey:endPointKey];
     for (int i=0; i<startPoints.count; i++) {
@@ -132,12 +132,21 @@ NSString *const yKey = @"y";
     return refreshControl;
 }
 
+- (void)updateColor:(UIColor *)color
+{
+    for (BarItem *barItem in self.barItems) {
+        barItem.color = color;
+        [barItem setNeedsDisplay];
+    }
+}
+
+
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll
 {
     if (self.originalTopContentInset == 0) self.originalTopContentInset = self.scrollView.contentInset.top;
-    self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.realContentOffsetY*krelativeHeightFactor);
+    self.center = CGPointMake(self.scrollView.frame.size.width * 0.5, self.realContentOffsetY*krelativeHeightFactor);
     if (self.state == CBStoreHouseRefreshControlStateIdle)
         [self updateBarItemsWithProgress:self.animationProgress];
 }
@@ -151,7 +160,7 @@ NSString *const yKey = @"y";
         if (self.state == CBStoreHouseRefreshControlStateRefreshing) {
             
             UIEdgeInsets newInsets = self.scrollView.contentInset;
-            newInsets.top = self.originalTopContentInset + self.dropHeight;
+            newInsets.top = self.originalTopContentInset;
             CGPoint contentOffset = self.scrollView.contentOffset;
             
             [UIView animateWithDuration:0 animations:^(void) {

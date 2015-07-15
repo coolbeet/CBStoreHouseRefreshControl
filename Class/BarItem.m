@@ -14,7 +14,7 @@
 @property (nonatomic) CGFloat lineWidth;
 @property (nonatomic) CGPoint startPoint;
 @property (nonatomic) CGPoint endPoint;
-@property (nonatomic) UIColor *color;
+
 
 @end
 
