@@ -97,10 +97,11 @@ NSString *const yKey = @"y";
         CGPoint startPoint = CGPointFromString(startPoints[i]);
         CGPoint endPoint = CGPointFromString(endPoints[i]);
         
-        if (startPoint.x > width) width = startPoint.x;
-        if (endPoint.x > width) width = endPoint.x;
-        if (startPoint.y > height) height = startPoint.y;
-        if (endPoint.y > height) height = endPoint.y;
+        // shift it base on line width
+        if (startPoint.x + lineWidth > width) width = startPoint.x + lineWidth;
+        if (endPoint.x + lineWidth > width) width = endPoint.x + lineWidth;
+        if (startPoint.y + lineWidth > height) height = startPoint.y + lineWidth;
+        if (endPoint.y + lineWidth > height) height = endPoint.y + lineWidth;
     }
     refreshControl.frame = CGRectMake(0, 0, width, height);
 
@@ -110,6 +111,9 @@ NSString *const yKey = @"y";
         
         CGPoint startPoint = CGPointFromString(startPoints[i]);
         CGPoint endPoint = CGPointFromString(endPoints[i]);
+        // shift it base on line width
+        startPoint = CGPointMake(startPoint.x + lineWidth/2, startPoint.y + lineWidth/2);
+        endPoint = CGPointMake(endPoint.x + lineWidth/2, endPoint.y + lineWidth/2);
 
         BarItem *barItem = [[BarItem alloc] initWithFrame:refreshControl.frame startPoint:startPoint endPoint:endPoint color:color lineWidth:lineWidth];
         barItem.tag = i;
@@ -136,9 +140,9 @@ NSString *const yKey = @"y";
 
 - (void)scrollViewDidScroll
 {
-    if (self.originalTopContentInset == 0) self.originalTopContentInset = self.scrollView.contentInset.top;
     self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.realContentOffsetY*krelativeHeightFactor);
     if (self.state == CBStoreHouseRefreshControlStateIdle)
+        self.originalTopContentInset = self.scrollView.contentInset.top;
         [self updateBarItemsWithProgress:self.animationProgress];
 }
 

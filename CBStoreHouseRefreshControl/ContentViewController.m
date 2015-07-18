@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.title = @"Storehouse";
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithWhite:0.1 alpha:1];
