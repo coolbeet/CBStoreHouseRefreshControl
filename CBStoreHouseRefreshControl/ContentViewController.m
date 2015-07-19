@@ -8,8 +8,11 @@
 
 #import "ContentViewController.h"
 #import "CBStoreHouseRefreshControl.h"
+#import "CBStoreHouseActivityIndicatorView.h"
 
 @interface ContentViewController ()
+
+@property (nonatomic, weak) CBStoreHouseActivityIndicatorView* activityView;
 
 @end
 
@@ -35,21 +38,43 @@
     self.tableView.tableFooterView = footer;
     
     // Let the show begins
-    self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:self.tableView target:self refreshAction:@selector(refreshTriggered:) plist:@"storehouse" color:[UIColor whiteColor] lineWidth:1.5 dropHeight:80 scale:1 horizontalRandomness:150 reverseLoadingAnimation:YES internalAnimationFactor:0.5];
+    self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:self.tableView target:self refreshAction:@selector(refreshTriggered:) plist:@"AKTA" color:[UIColor whiteColor] lineWidth:1.5 dropHeight:80 scale:1 horizontalRandomness:150 reverseLoadingAnimation:YES internalAnimationFactor:0.5];
     
     //self.storeHouseRefreshControl = [CBStoreHouseRefreshControl attachToScrollView:self.tableView target:self refreshAction:@selector(refreshTriggered:) plist:@"AKTA" color:[UIColor whiteColor] lineWidth:2 dropHeight:80 scale:0.7 horizontalRandomness:300 reverseLoadingAnimation:NO internalAnimationFactor:0.7];
-}
+    
+    }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell"]];
-    image.translatesAutoresizingMaskIntoConstraints = NO;
-    [cell.contentView addSubview:image];
     
-    [cell.contentView addConstraint:[NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:cell.contentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    [cell.contentView addConstraint:[NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:cell.contentView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    if (indexPath.row == 1)
+    {
+        UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell"]];
+        image.translatesAutoresizingMaskIntoConstraints = NO;
+        [cell.contentView addSubview:image];
+        
+        [cell.contentView addConstraint:[NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:cell.contentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+        [cell.contentView addConstraint:[NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:cell.contentView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    }
+    else
+    {
+        CBStoreHouseActivityIndicatorView *activityIndicator = [[CBStoreHouseActivityIndicatorView alloc] initWithPlist:@"AKTA"];
+        
+        CGRect frame = activityIndicator.frame;
+        frame.origin.y = 100.0;
+        activityIndicator.frame = frame;
+        
+        [cell.contentView addSubview:activityIndicator];
+        
+        activityIndicator.hasLoadingAnimation = YES;
+        activityIndicator.animating = YES;
+        
+        self.activityView = activityIndicator;
+        
+        [self performSelector:@selector(stopActivity) withObject:nil afterDelay:5.0];
+
+    }
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
@@ -57,9 +82,14 @@
     return cell;
 }
 
+- (void)stopActivity
+{
+    self.activityView.animating = NO;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
