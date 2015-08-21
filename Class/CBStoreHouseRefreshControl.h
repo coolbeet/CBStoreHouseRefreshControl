@@ -13,7 +13,8 @@
 + (CBStoreHouseRefreshControl*)attachToScrollView:(UIScrollView *)scrollView
                                            target:(id)target
                                     refreshAction:(SEL)refreshAction
-                                            plist:(NSString *)plist;
+                                            plist:(NSString *)plist
+                            navigationTranslucent:(BOOL)navigationTranslucent;
 
 + (CBStoreHouseRefreshControl*)attachToScrollView:(UIScrollView *)scrollView
                                            target:(id)target
@@ -25,7 +26,8 @@
                                             scale:(CGFloat)scale
                              horizontalRandomness:(CGFloat)horizontalRandomness
                           reverseLoadingAnimation:(BOOL)reverseLoadingAnimation
-                          internalAnimationFactor:(CGFloat)internalAnimationFactor;
+                          internalAnimationFactor:(CGFloat)internalAnimationFactor
+                            navigationTranslucent:(BOOL)navigationTranslucent;
 
 - (void)scrollViewDidScroll;
 

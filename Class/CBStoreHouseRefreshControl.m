@@ -41,6 +41,7 @@ NSString *const yKey = @"y";
 @property (nonatomic) CGFloat internalAnimationFactor;
 @property (nonatomic) int horizontalRandomness;
 @property (nonatomic) BOOL reverseLoadingAnimation;
+@property (nonatomic) BOOL navigationTranslucent;
 
 @end
 
@@ -50,6 +51,7 @@ NSString *const yKey = @"y";
                     target:(id)target
              refreshAction:(SEL)refreshAction
                      plist:(NSString *)plist
+     navigationTranslucent:(BOOL)navigationTranslucent
 {
     return [CBStoreHouseRefreshControl attachToScrollView:scrollView
                                                    target:target
@@ -61,7 +63,8 @@ NSString *const yKey = @"y";
                                                     scale:1
                                      horizontalRandomness:150
                                   reverseLoadingAnimation:NO
-                                  internalAnimationFactor:0.7];
+                                  internalAnimationFactor:0.7
+                                    navigationTranslucent:navigationTranslucent];
 }
 
 + (CBStoreHouseRefreshControl*)attachToScrollView:(UIScrollView *)scrollView
@@ -75,6 +78,7 @@ NSString *const yKey = @"y";
                              horizontalRandomness:(CGFloat)horizontalRandomness
                           reverseLoadingAnimation:(BOOL)reverseLoadingAnimation
                           internalAnimationFactor:(CGFloat)internalAnimationFactor
+                            navigationTranslucent:(BOOL)navigationTranslucent
 {
     CBStoreHouseRefreshControl *refreshControl = [[CBStoreHouseRefreshControl alloc] init];
     refreshControl.dropHeight = dropHeight;
@@ -84,6 +88,7 @@ NSString *const yKey = @"y";
     refreshControl.action = refreshAction;
     refreshControl.reverseLoadingAnimation = reverseLoadingAnimation;
     refreshControl.internalAnimationFactor = internalAnimationFactor;
+    refreshControl.navigationTranslucent = navigationTranslucent;
     [scrollView addSubview:refreshControl];
     
     // Calculate frame according to points max width and height
@@ -136,7 +141,7 @@ NSString *const yKey = @"y";
 
 - (void)scrollViewDidScroll
 {
-    if (self.originalTopContentInset == 0) self.originalTopContentInset = self.scrollView.contentInset.top;
+    if (self.originalTopContentInset == 0 && _navigationTranslucent) self.originalTopContentInset = self.scrollView.contentInset.top;
     self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.realContentOffsetY*krelativeHeightFactor);
     if (self.state == CBStoreHouseRefreshControlStateIdle)
         [self updateBarItemsWithProgress:self.animationProgress];
@@ -267,7 +272,7 @@ NSString *const yKey = @"y";
 {
     self.state = CBStoreHouseRefreshControlStateDisappearing;
     UIEdgeInsets newInsets = self.scrollView.contentInset;
-    newInsets.top = self.originalTopContentInset;
+    newInsets.top = self.originalTopContentInset * _navigationTranslucent;
     [UIView animateWithDuration:kdisappearDuration animations:^(void) {
         self.scrollView.contentInset = newInsets;
     } completion:^(BOOL finished) {
