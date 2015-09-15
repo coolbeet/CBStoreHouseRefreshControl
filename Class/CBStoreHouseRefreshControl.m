@@ -29,7 +29,7 @@ NSString *const yKey = @"y";
 @interface CBStoreHouseRefreshControl () <UIScrollViewDelegate>
 
 @property (nonatomic) CBStoreHouseRefreshControlState state;
-@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic, strong) NSArray *barItems;
 @property (nonatomic, strong) CADisplayLink *displayLink;
 @property (nonatomic, assign) id target;
