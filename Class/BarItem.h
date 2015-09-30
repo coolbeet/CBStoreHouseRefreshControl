@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/**
+ *  bar选项
+ */
 @interface BarItem : UIView
 
 @property (nonatomic) CGFloat translationX;
