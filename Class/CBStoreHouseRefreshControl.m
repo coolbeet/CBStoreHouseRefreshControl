@@ -140,6 +140,15 @@ NSString *const yKey = @"y";
     self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.realContentOffsetY*krelativeHeightFactor);
     if (self.state == CBStoreHouseRefreshControlStateIdle)
         [self updateBarItemsWithProgress:self.animationProgress];
+    
+    if (self.state == CBStoreHouseRefreshControlStateRefreshing)
+    {
+        CGFloat offset = MAX(self.scrollView.contentOffset.y * -1, 0.0f);
+        offset = MIN(offset, self.originalTopContentInset + self.dropHeight);
+        offset = MAX(offset, self.originalTopContentInset);
+        UIEdgeInsets contentInset = self.scrollView.contentInset;
+        self.scrollView.contentInset = UIEdgeInsetsMake(offset, contentInset.left, contentInset.bottom, contentInset.right);
+    }
 }
 
 - (void)scrollViewDidEndDragging
