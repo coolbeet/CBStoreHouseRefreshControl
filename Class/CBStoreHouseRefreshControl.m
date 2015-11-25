@@ -15,12 +15,6 @@ static const CGFloat kloadingTimingOffset = 0.1;
 static const CGFloat kdisappearDuration = 1.2;
 static const CGFloat krelativeHeightFactor = 2.f/5.f;
 
-typedef enum {
-    CBStoreHouseRefreshControlStateIdle = 0,
-    CBStoreHouseRefreshControlStateRefreshing = 1,
-    CBStoreHouseRefreshControlStateDisappearing = 2
-} CBStoreHouseRefreshControlState;
-
 NSString *const startPointKey = @"startPoints";
 NSString *const endPointKey = @"endPoints";
 NSString *const xKey = @"x";
@@ -150,29 +144,33 @@ NSString *const yKey = @"y";
         
         if (self.state == CBStoreHouseRefreshControlStateRefreshing) {
             
-            UIEdgeInsets newInsets = self.scrollView.contentInset;
-            newInsets.top = self.originalTopContentInset + self.dropHeight;
-            CGPoint contentOffset = self.scrollView.contentOffset;
-            
-            [UIView animateWithDuration:0 animations:^(void) {
-                self.scrollView.contentInset = newInsets;
-                self.scrollView.contentOffset = contentOffset;
-            }];
-            
-            #pragma clang diagnostic push
-            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            
-            if ([self.target respondsToSelector:self.action])
-                [self.target performSelector:self.action withObject:self];
-            
-            #pragma clang diagnostic pop
-            
-            [self startLoadingAnimation];
+            [self startLoading];
         }
     }
 }
-
 #pragma mark Private Methods
+
+- (void)startLoading {
+    UIEdgeInsets newInsets = self.scrollView.contentInset;
+    newInsets.top = self.originalTopContentInset + self.dropHeight;
+    CGPoint contentOffset = self.scrollView.contentOffset;
+    
+    [UIView animateWithDuration:0 animations:^(void) {
+        self.scrollView.contentInset = newInsets;
+        self.scrollView.contentOffset = contentOffset;
+    }];
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    
+    if ([self.target respondsToSelector:self.action])
+        [self.target performSelector:self.action withObject:self];
+    
+#pragma clang diagnostic pop
+    
+    [self startLoadingAnimation];
+}
+
 
 - (CGFloat)animationProgress
 {
@@ -263,19 +261,37 @@ NSString *const yKey = @"y";
 
 #pragma mark Public Methods
 
-- (void)finishingLoading
+- (void)triggerLoading {
+    //if (self.state == CBStoreHouseRefreshControlStateIdle || self.state == CBStoreHouseRefreshControlStateDisappearing) {
+        self.state = CBStoreHouseRefreshControlStateRefreshing;
+        self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, -self.dropHeight);
+        [self updateBarItemsWithProgress:1];
+        [self startLoading];
+    //}
+}
+
+- (void)finishingLoading:(BOOL)animated
 {
     self.state = CBStoreHouseRefreshControlStateDisappearing;
+    
     UIEdgeInsets newInsets = self.scrollView.contentInset;
     newInsets.top = self.originalTopContentInset;
-    [UIView animateWithDuration:kdisappearDuration animations:^(void) {
-        self.scrollView.contentInset = newInsets;
-    } completion:^(BOOL finished) {
+    
+    if (animated) {
+        [UIView animateWithDuration:kdisappearDuration animations:^(void) {
+            self.scrollView.contentInset = newInsets;
+        } completion:^(BOOL finished) {
+            self.state = CBStoreHouseRefreshControlStateIdle;
+            [self.displayLink invalidate];
+            self.disappearProgress = 1;
+        }];
+    } else {
         self.state = CBStoreHouseRefreshControlStateIdle;
         [self.displayLink invalidate];
         self.disappearProgress = 1;
-    }];
-
+        self.scrollView.contentInset = newInsets;
+    }
+    
     for (BarItem *barItem in self.barItems) {
         [barItem.layer removeAllAnimations];
         barItem.alpha = kbarDarkAlpha;
@@ -284,6 +300,11 @@ NSString *const yKey = @"y";
     self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateDisappearAnimation)];
     [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     self.disappearProgress = 1;
+}
+
+- (void)finishingLoading
+{
+    [self finishingLoading:YES];
 }
 
 @end
