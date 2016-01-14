@@ -102,6 +102,7 @@ NSString *const yKey = @"y";
         if (startPoint.y > height) height = startPoint.y;
         if (endPoint.y > height) height = endPoint.y;
     }
+    height += lineWidth*0.5;
     refreshControl.frame = CGRectMake(0, 0, width, height);
 
     // Create bar items
