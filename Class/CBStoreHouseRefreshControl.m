@@ -102,6 +102,7 @@ NSString *const yKey = @"y";
         if (startPoint.y > height) height = startPoint.y;
         if (endPoint.y > height) height = endPoint.y;
     }
+    height += lineWidth*0.5;
     refreshControl.frame = CGRectMake(0, 0, width, height);
 
     // Create bar items
@@ -136,7 +137,7 @@ NSString *const yKey = @"y";
 
 - (void)scrollViewDidScroll
 {
-    if (self.originalTopContentInset == 0) self.originalTopContentInset = self.scrollView.contentInset.top;
+    if (self.originalTopContentInset == 0 && self.state != CBStoreHouseRefreshControlStateRefreshing) self.originalTopContentInset = self.scrollView.contentInset.top;
     self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.realContentOffsetY*krelativeHeightFactor);
     if (self.state == CBStoreHouseRefreshControlStateIdle)
         [self updateBarItemsWithProgress:self.animationProgress];
@@ -176,7 +177,7 @@ NSString *const yKey = @"y";
 
 - (CGFloat)animationProgress
 {
-    return MIN(1.f, MAX(0, fabsf(self.realContentOffsetY)/self.dropHeight));
+    return MIN(1.f, MAX(0, fabs(self.realContentOffsetY)/self.dropHeight));
 }
 
 - (CGFloat)realContentOffsetY
