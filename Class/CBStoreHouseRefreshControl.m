@@ -309,6 +309,9 @@ NSString *const yKey = @"y";
 
 - (void)finishingLoading
 {
+    if (self.state != CBStoreHouseRefreshControlStateRefreshing) {
+        return;
+    }
     self.state = CBStoreHouseRefreshControlStateDisappearing;
     [UIView animateWithDuration:kDuration animations:^(void) {
         UIEdgeInsets newInsets = self.scrollView.contentInset;
