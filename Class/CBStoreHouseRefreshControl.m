@@ -179,9 +179,9 @@ NSString *const yKey = @"y";
             
             UIEdgeInsets newInsets = self.scrollView.contentInset;
             if(self.invert) {
-                newInsets.bottom += self.dropHeight;
+                newInsets.bottom += self.realContentOffsetY + self.scrollView.frame.size.height - self.scrollView.contentSize.height;
             } else {
-                newInsets.top += self.dropHeight;
+                newInsets.top += self.realContentOffsetY;
             }
             CGPoint contentOffset = self.scrollView.contentOffset;
             self.scrollView.contentInset = newInsets;
