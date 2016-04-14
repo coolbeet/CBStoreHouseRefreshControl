@@ -12,7 +12,7 @@
 static const CGFloat kloadingIndividualAnimationTiming = 0.8;
 static const CGFloat kbarDarkAlpha = 0.4;
 static const CGFloat kloadingTimingOffset = 0.1;
-static const CGFloat kdisappearDuration = 0.5f;
+static const CGFloat kDuration = 0.5f;
 static const CGFloat krelativeHeightFactor = 0.5f;
 
 typedef enum {
@@ -179,13 +179,15 @@ NSString *const yKey = @"y";
             
             UIEdgeInsets newInsets = self.scrollView.contentInset;
             if(self.invert) {
-                newInsets.bottom += self.realContentOffsetY + self.scrollView.frame.size.height - self.scrollView.contentSize.height;
+                newInsets.bottom += self.dropHeight;
             } else {
-                newInsets.top += self.realContentOffsetY;
+                newInsets.top += self.dropHeight;
             }
             CGPoint contentOffset = self.scrollView.contentOffset;
-            self.scrollView.contentInset = newInsets;
-            self.scrollView.contentOffset = contentOffset;
+            [UIView animateWithDuration:kDuration animations:^(void) {
+                self.scrollView.contentInset = newInsets;
+                self.scrollView.contentOffset = contentOffset;
+            }];
             
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -286,7 +288,7 @@ NSString *const yKey = @"y";
 - (void)updateDisappearAnimation
 {
     if (self.disappearProgress >= 0 && self.disappearProgress <= 1) {
-        self.disappearProgress -= 1/60.f/kdisappearDuration;
+        self.disappearProgress -= 1/60.f/kDuration;
         //60.f means this method get called 60 times per second
         [self updateBarItemsWithProgress:self.disappearProgress];
     }
@@ -297,7 +299,7 @@ NSString *const yKey = @"y";
 - (void)finishingLoading
 {
     self.state = CBStoreHouseRefreshControlStateDisappearing;
-    [UIView animateWithDuration:kdisappearDuration animations:^(void) {
+    [UIView animateWithDuration:kDuration animations:^(void) {
         UIEdgeInsets newInsets = self.scrollView.contentInset;
         if(self.invert) {
             newInsets.bottom -= self.dropHeight;
