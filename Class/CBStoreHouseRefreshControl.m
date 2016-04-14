@@ -12,8 +12,8 @@
 static const CGFloat kloadingIndividualAnimationTiming = 0.8;
 static const CGFloat kbarDarkAlpha = 0.4;
 static const CGFloat kloadingTimingOffset = 0.1;
-static const CGFloat kdisappearDuration = 1.2;
-static const CGFloat krelativeHeightFactor = 2.f/5.f;
+static const CGFloat kdisappearDuration = 0.5f;
+static const CGFloat krelativeHeightFactor = 0.5f;
 
 typedef enum {
     CBStoreHouseRefreshControlStateIdle = 0,
@@ -29,27 +29,27 @@ NSString *const yKey = @"y";
 @interface CBStoreHouseRefreshControl () <UIScrollViewDelegate>
 
 @property (nonatomic) CBStoreHouseRefreshControlState state;
-@property (nonatomic, weak) UIScrollView *scrollView;
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSArray *barItems;
 @property (nonatomic, strong) CADisplayLink *displayLink;
 @property (nonatomic, assign) id target;
 @property (nonatomic) SEL action;
 
 @property (nonatomic) CGFloat dropHeight;
-@property (nonatomic) CGFloat originalTopContentInset;
 @property (nonatomic) CGFloat disappearProgress;
 @property (nonatomic) CGFloat internalAnimationFactor;
 @property (nonatomic) int horizontalRandomness;
 @property (nonatomic) BOOL reverseLoadingAnimation;
+@property (nonatomic) BOOL invert;
 
 @end
 
 @implementation CBStoreHouseRefreshControl
 
 + (CBStoreHouseRefreshControl*)attachToScrollView:(UIScrollView *)scrollView
-                    target:(id)target
-             refreshAction:(SEL)refreshAction
-                     plist:(NSString *)plist
+                                           target:(id)target
+                                    refreshAction:(SEL)refreshAction
+                                            plist:(NSString *)plist
 {
     return [CBStoreHouseRefreshControl attachToScrollView:scrollView
                                                    target:target
@@ -61,7 +61,8 @@ NSString *const yKey = @"y";
                                                     scale:1
                                      horizontalRandomness:150
                                   reverseLoadingAnimation:NO
-                                  internalAnimationFactor:0.7];
+                                  internalAnimationFactor:0.7
+                                                   invert:NO];
 }
 
 + (CBStoreHouseRefreshControl*)attachToScrollView:(UIScrollView *)scrollView
@@ -75,6 +76,7 @@ NSString *const yKey = @"y";
                              horizontalRandomness:(CGFloat)horizontalRandomness
                           reverseLoadingAnimation:(BOOL)reverseLoadingAnimation
                           internalAnimationFactor:(CGFloat)internalAnimationFactor
+                                           invert:(BOOL)invert
 {
     CBStoreHouseRefreshControl *refreshControl = [[CBStoreHouseRefreshControl alloc] init];
     refreshControl.dropHeight = dropHeight;
@@ -85,6 +87,9 @@ NSString *const yKey = @"y";
     refreshControl.reverseLoadingAnimation = reverseLoadingAnimation;
     refreshControl.internalAnimationFactor = internalAnimationFactor;
     [scrollView addSubview:refreshControl];
+    
+    refreshControl.invert = invert;
+    
     
     // Calculate frame according to points max width and height
     CGFloat width = 0;
@@ -103,17 +108,16 @@ NSString *const yKey = @"y";
         if (endPoint.y > height) height = endPoint.y;
     }
     refreshControl.frame = CGRectMake(0, 0, width, height);
-
+    
     // Create bar items
     NSMutableArray *mutableBarItems = [[NSMutableArray alloc] init];
     for (int i=0; i<startPoints.count; i++) {
         
         CGPoint startPoint = CGPointFromString(startPoints[i]);
         CGPoint endPoint = CGPointFromString(endPoints[i]);
-
+        
         BarItem *barItem = [[BarItem alloc] initWithFrame:refreshControl.frame startPoint:startPoint endPoint:endPoint color:color lineWidth:lineWidth];
         barItem.tag = i;
-        barItem.backgroundColor=[UIColor clearColor];
         barItem.alpha = 0;
         [mutableBarItems addObject:barItem];
         [refreshControl addSubview:barItem];
@@ -123,12 +127,19 @@ NSString *const yKey = @"y";
     
     refreshControl.barItems = [NSArray arrayWithArray:mutableBarItems];
     refreshControl.frame = CGRectMake(0, 0, width, height);
-    refreshControl.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, 0);
+    if (refreshControl.invert) {
+        refreshControl.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, refreshControl.scrollView.contentSize.height+refreshControl.dropHeight*krelativeHeightFactor);
+    } else {
+        refreshControl.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, refreshControl.realContentOffsetY*krelativeHeightFactor);
+    }
     for (BarItem *barItem in refreshControl.barItems) {
         [barItem setupWithFrame:refreshControl.frame];
     }
-
-    refreshControl.transform = CGAffineTransformMakeScale(scale, scale);
+    
+    if(refreshControl.invert) {
+        refreshControl.transform = CGAffineTransformMake(1, 0, 0, -1, 0, 0);
+    }
+    refreshControl.transform = CGAffineTransformScale(refreshControl.transform, scale, scale);
     return refreshControl;
 }
 
@@ -136,36 +147,53 @@ NSString *const yKey = @"y";
 
 - (void)scrollViewDidScroll
 {
-    if (self.originalTopContentInset == 0) self.originalTopContentInset = self.scrollView.contentInset.top;
-    self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.realContentOffsetY*krelativeHeightFactor);
+    if (self.state == CBStoreHouseRefreshControlStateRefreshing) {
+        if (self.invert) {
+            self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.scrollView.contentSize.height+self.dropHeight*krelativeHeightFactor);
+        } else {
+            self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, (self.realContentOffsetY-self.dropHeight)*krelativeHeightFactor);
+        }
+    } else {
+        if (self.invert) {
+            self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.scrollView.contentSize.height+self.dropHeight*krelativeHeightFactor);
+        } else {
+            self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.realContentOffsetY*krelativeHeightFactor);
+        }
+        
+    }
     if (self.state == CBStoreHouseRefreshControlStateIdle)
         [self updateBarItemsWithProgress:self.animationProgress];
 }
 
 - (void)scrollViewDidEndDragging
 {
-    if (self.state == CBStoreHouseRefreshControlStateIdle && self.realContentOffsetY < -self.dropHeight) {
-
-        if (self.animationProgress == 1) self.state = CBStoreHouseRefreshControlStateRefreshing;
+    if (self.state == CBStoreHouseRefreshControlStateIdle) {
+        if(self.invert == NO && self.realContentOffsetY < -self.dropHeight) {
+            if (self.animationProgress == 1) self.state = CBStoreHouseRefreshControlStateRefreshing;
+        }
+        if(self.invert == YES && self.realContentOffsetY + self.scrollView.frame.size.height - self.scrollView.contentSize.height > self.dropHeight) {
+            if (self.animationProgress == 1) self.state = CBStoreHouseRefreshControlStateRefreshing;
+        }
         
         if (self.state == CBStoreHouseRefreshControlStateRefreshing) {
             
             UIEdgeInsets newInsets = self.scrollView.contentInset;
-            newInsets.top = self.originalTopContentInset + self.dropHeight;
+            if(self.invert) {
+                newInsets.bottom += self.dropHeight;
+            } else {
+                newInsets.top += self.dropHeight;
+            }
             CGPoint contentOffset = self.scrollView.contentOffset;
+            self.scrollView.contentInset = newInsets;
+            self.scrollView.contentOffset = contentOffset;
             
-            [UIView animateWithDuration:0 animations:^(void) {
-                self.scrollView.contentInset = newInsets;
-                self.scrollView.contentOffset = contentOffset;
-            }];
-            
-            #pragma clang diagnostic push
-            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             
             if ([self.target respondsToSelector:self.action])
                 [self.target performSelector:self.action withObject:self];
             
-            #pragma clang diagnostic pop
+#pragma clang diagnostic pop
             
             [self startLoadingAnimation];
         }
@@ -176,12 +204,15 @@ NSString *const yKey = @"y";
 
 - (CGFloat)animationProgress
 {
+    if(self.invert) {
+        return MIN(1.f, MAX(0, fabsf(self.scrollView.contentSize.height - (self.realContentOffsetY - self.scrollView.contentInset.top) - self.scrollView.frame.size.height)/self.dropHeight));
+    }
     return MIN(1.f, MAX(0, fabsf(self.realContentOffsetY)/self.dropHeight));
 }
 
 - (CGFloat)realContentOffsetY
 {
-    return self.scrollView.contentOffset.y + self.originalTopContentInset;
+    return self.scrollView.contentOffset.y + self.scrollView.contentInset.top;
 }
 
 - (void)updateBarItemsWithProgress:(CGFloat)progress
@@ -245,7 +276,7 @@ NSString *const yKey = @"y";
             isLastOne = barItem.tag == 0;
         else
             isLastOne = barItem.tag == self.barItems.count-1;
-            
+        
         if (isLastOne && self.state == CBStoreHouseRefreshControlStateRefreshing) {
             [self startLoadingAnimation];
         }
@@ -266,16 +297,21 @@ NSString *const yKey = @"y";
 - (void)finishingLoading
 {
     self.state = CBStoreHouseRefreshControlStateDisappearing;
-    UIEdgeInsets newInsets = self.scrollView.contentInset;
-    newInsets.top = self.originalTopContentInset;
     [UIView animateWithDuration:kdisappearDuration animations:^(void) {
+        UIEdgeInsets newInsets = self.scrollView.contentInset;
+        if(self.invert) {
+            newInsets.bottom -= self.dropHeight;
+        } else {
+            newInsets.top -= self.dropHeight;
+        }
+        
         self.scrollView.contentInset = newInsets;
     } completion:^(BOOL finished) {
         self.state = CBStoreHouseRefreshControlStateIdle;
         [self.displayLink invalidate];
         self.disappearProgress = 1;
     }];
-
+    
     for (BarItem *barItem in self.barItems) {
         [barItem.layer removeAllAnimations];
         barItem.alpha = kbarDarkAlpha;
