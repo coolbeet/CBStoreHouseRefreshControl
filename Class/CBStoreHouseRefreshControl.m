@@ -147,15 +147,16 @@ NSString *const yKey = @"y";
 
 - (void)scrollViewDidScroll
 {
+//    printf("%f\n",[self bottomDrop]);
     if (self.state == CBStoreHouseRefreshControlStateRefreshing) {
         if (self.invert) {
-            self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.scrollView.contentSize.height+self.dropHeight*krelativeHeightFactor);
+            self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.scrollView.contentSize.height+[self bottomDrop]*krelativeHeightFactor);
         } else {
             self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, (self.realContentOffsetY-self.dropHeight)*krelativeHeightFactor);
         }
     } else {
         if (self.invert) {
-            self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.scrollView.contentSize.height+self.dropHeight*krelativeHeightFactor);
+            self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.scrollView.contentSize.height+[self bottomDrop]*krelativeHeightFactor);
         } else {
             self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.realContentOffsetY*krelativeHeightFactor);
         }
@@ -165,28 +166,39 @@ NSString *const yKey = @"y";
         [self updateBarItemsWithProgress:self.animationProgress];
 }
 
+- (CGFloat)bottomDrop {
+    return (self.realContentOffsetY + self.scrollView.frame.size.height - self.scrollView.contentSize.height-self.scrollView.contentInset.top);
+}
+
 - (void)scrollViewDidEndDragging
 {
     if (self.state == CBStoreHouseRefreshControlStateIdle) {
         if(self.invert == NO && self.realContentOffsetY < -self.dropHeight) {
             if (self.animationProgress == 1) self.state = CBStoreHouseRefreshControlStateRefreshing;
         }
-        if(self.invert == YES && self.realContentOffsetY + self.scrollView.frame.size.height - self.scrollView.contentSize.height > self.dropHeight) {
+        if(self.invert == YES && [self bottomDrop] > self.dropHeight) {
             if (self.animationProgress == 1) self.state = CBStoreHouseRefreshControlStateRefreshing;
         }
         
         if (self.state == CBStoreHouseRefreshControlStateRefreshing) {
             
             UIEdgeInsets newInsets = self.scrollView.contentInset;
+            UIEdgeInsets curInset = self.scrollView.contentInset;
             if(self.invert) {
                 newInsets.bottom += self.dropHeight;
+                curInset.bottom += [self bottomDrop];
             } else {
                 newInsets.top += self.dropHeight;
+                curInset.top -= self.scrollView.contentOffset.y;
             }
-            CGPoint contentOffset = self.scrollView.contentOffset;
-            [UIView animateWithDuration:kDuration animations:^(void) {
+            
+            self.scrollView.contentInset = curInset;
+            [self.scrollView setNeedsLayout];
+            [UIView animateWithDuration:kDuration animations:^{
+                self.scrollView.bounces = NO;
                 self.scrollView.contentInset = newInsets;
-                self.scrollView.contentOffset = contentOffset;
+            } completion:^(BOOL finished) {
+                self.scrollView.bounces = YES;
             }];
             
 #pragma clang diagnostic push
@@ -307,8 +319,10 @@ NSString *const yKey = @"y";
             newInsets.top -= self.dropHeight;
         }
         
+        self.scrollView.bounces = NO;
         self.scrollView.contentInset = newInsets;
     } completion:^(BOOL finished) {
+        self.scrollView.bounces = YES;
         self.state = CBStoreHouseRefreshControlStateIdle;
         [self.displayLink invalidate];
         self.disappearProgress = 1;
