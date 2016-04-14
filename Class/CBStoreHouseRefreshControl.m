@@ -189,7 +189,6 @@ NSString *const yKey = @"y";
                 curInset.bottom += [self bottomDrop];
             } else {
                 newInsets.top += self.dropHeight;
-                curInset.top -= self.scrollView.contentOffset.y;
             }
             
             self.scrollView.contentInset = curInset;
