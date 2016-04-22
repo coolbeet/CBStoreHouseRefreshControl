@@ -25,7 +25,8 @@
                                             scale:(CGFloat)scale
                              horizontalRandomness:(CGFloat)horizontalRandomness
                           reverseLoadingAnimation:(BOOL)reverseLoadingAnimation
-                          internalAnimationFactor:(CGFloat)internalAnimationFactor;
+                          internalAnimationFactor:(CGFloat)internalAnimationFactor
+                                           invert:(BOOL)invert;
 
 - (void)scrollViewDidScroll;
 
