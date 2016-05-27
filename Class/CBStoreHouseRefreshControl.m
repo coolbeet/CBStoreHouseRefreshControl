@@ -174,7 +174,7 @@ NSString *const yKey = @"y";
 
 - (CGFloat)animationProgress
 {
-    return MIN(1.f, MAX(0, fabsf(self.realContentOffsetY)/self.dropHeight));
+    return MIN(1.f, MAX(0, fabs(self.realContentOffsetY)/self.dropHeight));
 }
 
 - (CGFloat)realContentOffsetY
