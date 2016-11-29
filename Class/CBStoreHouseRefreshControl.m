@@ -152,8 +152,14 @@ NSString *const yKey = @"y";
     if (self.state == CBStoreHouseRefreshControlStateIdle){
         //BUGFIX beim drehen
         //TODO checks auf ipad!
-        if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)){
-            self.originalTopContentInset = 44;
+         if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)){
+            if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+            {
+                self.originalTopContentInset = 64;
+
+            }else{
+                self.originalTopContentInset = 44;
+            }
 
         }else{
             self.originalTopContentInset = 64;
