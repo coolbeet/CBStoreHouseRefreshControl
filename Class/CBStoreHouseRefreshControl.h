@@ -10,6 +10,8 @@
 
 @interface CBStoreHouseRefreshControl : UIView
 
+
+
 + (CBStoreHouseRefreshControl*)attachToScrollView:(UIScrollView *)scrollView
                                            target:(id)target
                                     refreshAction:(SEL)refreshAction
@@ -32,5 +34,7 @@
 - (void)scrollViewDidEndDragging;
 
 - (void)finishingLoading;
+
+- (int)refreshcontrolstate;
 
 @end

@@ -10,16 +10,18 @@
 #import "BarItem.h"
 
 static const CGFloat kloadingIndividualAnimationTiming = 0.8;
-static const CGFloat kbarDarkAlpha = 0.4;
-static const CGFloat kloadingTimingOffset = 0.1;
-static const CGFloat kdisappearDuration = 1.2;
+static const CGFloat kbarDarkAlpha = 0.2;
+static const CGFloat kloadingTimingOffset = 0.021;
+static const CGFloat kdisappearDuration = 0.5;
 static const CGFloat krelativeHeightFactor = 2.f/5.f;
 
 typedef enum {
     CBStoreHouseRefreshControlStateIdle = 0,
     CBStoreHouseRefreshControlStateRefreshing = 1,
-    CBStoreHouseRefreshControlStateDisappearing = 2
+    CBStoreHouseRefreshControlStateDisappearing = 2,
+
 } CBStoreHouseRefreshControlState;
+
 
 NSString *const startPointKey = @"startPoints";
 NSString *const endPointKey = @"endPoints";
@@ -28,17 +30,17 @@ NSString *const yKey = @"y";
 
 @interface CBStoreHouseRefreshControl () <UIScrollViewDelegate>
 
-@property (nonatomic) CBStoreHouseRefreshControlState state;
+
+@property (nonatomic) CBStoreHouseRefreshControlState* state;
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic, strong) NSArray *barItems;
 @property (nonatomic, strong) CADisplayLink *displayLink;
 @property (nonatomic, assign) id target;
 @property (nonatomic) SEL action;
-
 @property (nonatomic) CGFloat dropHeight;
-@property (nonatomic) CGFloat originalTopContentInset;
 @property (nonatomic) CGFloat disappearProgress;
 @property (nonatomic) CGFloat internalAnimationFactor;
+@property (nonatomic) CGFloat originalTopContentInset;
 @property (nonatomic) int horizontalRandomness;
 @property (nonatomic) BOOL reverseLoadingAnimation;
 
@@ -97,10 +99,10 @@ NSString *const yKey = @"y";
         CGPoint startPoint = CGPointFromString(startPoints[i]);
         CGPoint endPoint = CGPointFromString(endPoints[i]);
         
-        if (startPoint.x > width) width = startPoint.x;
-        if (endPoint.x > width) width = endPoint.x;
-        if (startPoint.y > height) height = startPoint.y;
-        if (endPoint.y > height) height = endPoint.y;
+        if (startPoint.x + lineWidth > width) width = startPoint.x + lineWidth;
+        if (endPoint.x + lineWidth > width) width = endPoint.x + lineWidth;
+        if (startPoint.y + lineWidth > height) height = startPoint.y + lineWidth;
+        if (endPoint.y + lineWidth > height) height = endPoint.y + lineWidth;
     }
     refreshControl.frame = CGRectMake(0, 0, width, height);
 
@@ -111,6 +113,10 @@ NSString *const yKey = @"y";
         CGPoint startPoint = CGPointFromString(startPoints[i]);
         CGPoint endPoint = CGPointFromString(endPoints[i]);
 
+        // shift it base on line width
+        startPoint = CGPointMake(startPoint.x + lineWidth/2, startPoint.y + lineWidth/2);
+        endPoint = CGPointMake(endPoint.x + lineWidth/2, endPoint.y + lineWidth/2);
+        
         BarItem *barItem = [[BarItem alloc] initWithFrame:refreshControl.frame startPoint:startPoint endPoint:endPoint color:color lineWidth:lineWidth];
         barItem.tag = i;
         barItem.backgroundColor=[UIColor clearColor];
@@ -123,7 +129,12 @@ NSString *const yKey = @"y";
     
     refreshControl.barItems = [NSArray arrayWithArray:mutableBarItems];
     refreshControl.frame = CGRectMake(0, 0, width, height);
-    refreshControl.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, 0);
+    //refreshControl.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, 0);
+    
+
+    
+    refreshControl.center = CGPointMake(scrollView.frame.size.width/2, 0);
+
     for (BarItem *barItem in refreshControl.barItems) {
         [barItem setupWithFrame:refreshControl.frame];
     }
@@ -136,14 +147,47 @@ NSString *const yKey = @"y";
 
 - (void)scrollViewDidScroll
 {
-    if (self.originalTopContentInset == 0) self.originalTopContentInset = self.scrollView.contentInset.top;
-    self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.realContentOffsetY*krelativeHeightFactor);
-    if (self.state == CBStoreHouseRefreshControlStateIdle)
+    // not ok BUGFIX beim start if (self.originalTopContentInset == 0) self.originalTopContentInset = self.scrollView.contentInset.top;
+    self.center = CGPointMake(_scrollView.bounds.size.width/2, self.realContentOffsetY*krelativeHeightFactor);
+    if (self.state == CBStoreHouseRefreshControlStateIdle){
+        //BUGFIX beim drehen
+        //TODO checks auf ipad!
+         if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)){
+            if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+            {
+                self.originalTopContentInset = 64;
+
+            }else{
+                self.originalTopContentInset = 44;
+            }
+
+        }else{
+            self.originalTopContentInset = 64;
+
+        }
         [self updateBarItemsWithProgress:self.animationProgress];
+    }
+    
+    /*
+    BUGFIX wenn refresh läuft..
+    
+        CGFloat offset = MAX(self.scrollView.contentOffset.y * -1, 0.0f);
+        offset = MIN(offset, self.originalTopContentInset + self.dropHeight);
+        offset = MAX(offset, self.originalTopContentInset);
+        UIEdgeInsets contentInset = self.scrollView.contentInset;
+        self.scrollView.contentInset = UIEdgeInsetsMake(offset, contentInset.left, contentInset.bottom, contentInset.right);
+   
+    //BUGFIX
+    */
+    
 }
+
+
 
 - (void)scrollViewDidEndDragging
 {
+    
+    
     if (self.state == CBStoreHouseRefreshControlStateIdle && self.realContentOffsetY < -self.dropHeight) {
 
         if (self.animationProgress == 1) self.state = CBStoreHouseRefreshControlStateRefreshing;
@@ -166,6 +210,10 @@ NSString *const yKey = @"y";
                 [self.target performSelector:self.action withObject:self];
             
             #pragma clang diagnostic pop
+                UIImpactFeedbackGenerator *myGen = [[UIImpactFeedbackGenerator alloc] init];
+                [myGen initWithStyle:(UIImpactFeedbackStyleMedium)];
+                [myGen impactOccurred];
+                myGen = NULL;
             
             [self startLoadingAnimation];
         }
@@ -271,8 +319,10 @@ NSString *const yKey = @"y";
     [UIView animateWithDuration:kdisappearDuration animations:^(void) {
         self.scrollView.contentInset = newInsets;
     } completion:^(BOOL finished) {
+ 
         self.state = CBStoreHouseRefreshControlStateIdle;
         [self.displayLink invalidate];
+        self.displayLink = nil;
         self.disappearProgress = 1;
     }];
 
@@ -284,6 +334,10 @@ NSString *const yKey = @"y";
     self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateDisappearAnimation)];
     [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     self.disappearProgress = 1;
+}
+
+- (int)refreshcontrolstate{
+    return self.state;
 }
 
 @end
