@@ -19,6 +19,7 @@
     [super viewDidLoad];
     
     self.title = @"Storehouse";
+    self.navigationController.navigationBar.translucent = false;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithWhite:0.1 alpha:1];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
